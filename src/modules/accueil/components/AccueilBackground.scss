@@ -1,5 +1,23 @@
-.carte{
-  -webkit-mask-image: radial-gradient(circle at center, black 14%, transparent 70%);
+@keyframes fadeInCarte {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+.carte {
+  -webkit-mask-image: radial-gradient(
+    circle at right,
+    black 24%,
+    transparent 48%
+  );
   // mask-image: radial-gradient(circle at center, black 14%, transparent 70%);
-  mask-image: radial-gradient(circle at right, black 18%, transparent 44%);
+  mask-image: radial-gradient(circle at right, black 24%, transparent 48%);
+  opacity: 0;
+
+  &.animate {
+    animation: fadeInCarte 1.5s ease-out forwards;
+  }
 }
