@@ -58,6 +58,20 @@ const LoginForm = () => {
         />
       </div>
 
+      <div className="w-full mb-4">
+        <label
+          htmlFor="magical-id"
+          className="block mb-2 text-sm italic text-left text-gray-300 text-primary"
+        >
+          Saisissez votre parole de passage
+        </label>
+        <input
+          type="text"
+          id="magical-id"
+          className="w-full p-3 text-white bg-black border-2 rounded-md border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+        />
+      </div>
+
       <button className="w-full py-3 text-lg font-semibold text-white transition duration-200 border rounded-md border-[#454440] hover:bg-primary hover:text-black">
         Continuer
       </button>
