@@ -1,0 +1,111 @@
+$bar-width: 20px;
+$bar-height: 2px;
+$hamburger-gap: 6px;
+$animation-timing: 200ms ease-in-out;
+$x-width: 30px;
+
+.navbar {
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: $hamburger-gap;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 500;
+
+    @media (max-width: 768px) {
+      display: flex;
+    }
+
+    &__bar1 {
+      width: calc($bar-width * 2);
+    }
+
+    &__bar2 {
+      width: $bar-width;
+    }
+
+    &__bar1,
+    &__bar2 {
+      content: "";
+      height: $bar-height;
+      background-color: #4b3f39;
+      transform-origin: left center;
+      border-radius: 20px;
+      transition: width $animation-timing, rotate $animation-timing,
+        translate $animation-timing;
+    }
+
+    &__close {
+      .hamburger__bar1 {
+        rotate: 45deg;
+        width: $x-width !important;
+        translate: 0 calc($bar-height / -2);
+      }
+      .hamburger__bar2 {
+        rotate: -45deg;
+        width: $x-width !important;
+        translate: 0 calc($bar-height / 2);
+      }
+    }
+  }
+
+  .nav-content {
+    @media (max-width: 768px) {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background-color: var(--color-background);
+      padding: 80px 20px 20px;
+      transition: right 0.3s ease-in-out;
+      z-index: 99;
+
+      &.active {
+        right: 0;
+      }
+    }
+  }
+
+  .nav-list {
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  .nav-item {
+    @media (max-width: 768px) {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: var(--color-secondary);
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      span {
+        font-size: 1.1rem;
+        font-style: italic;
+      }
+    }
+  }
+
+  .logo-separator {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+}
