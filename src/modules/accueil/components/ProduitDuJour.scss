@@ -1,0 +1,35 @@
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.titre-produit-du-jour {
+  opacity: 0;
+  &.animate {
+    animation: slideInLeft 1s ease-out forwards;
+    animation-delay: 1.5s;
+  }
+}
+
+.fleur-decoration {
+  opacity: 0;
+  &.animate {
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+  }
+}

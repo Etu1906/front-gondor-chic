@@ -1,25 +1,35 @@
 import Image from "next/image";
 import "./DescriptionProduit.scss";
 import { useLoginStore } from "@/modules/connexion/services/loginStore";
+import { DescriptionProduitProps } from "../types/produit.types";
+import { useAnimationStore } from "../services/animationStore";
+import { formatGondariar } from "@/shared/helpers/numberHelper";
 
-const DescriptionProduit = () => {
+const DescriptionProduit = ({
+  nom,
+  description,
+  avis,
+  note,
+  prix,
+  ancienPrix,
+  stock,
+}: DescriptionProduitProps) => {
   const openLoginModal = useLoginStore((state) => state.openLoginModal);
+  const isDataLoaded = useAnimationStore((state) => state.isDataLoaded);
 
   return (
-    <div className="flex flex-col gap-9">
-      <h2 className="font-serif text-5xl leading-tight">
-        {"Médaillon de l'Étoile d'Obsidienne"}
-      </h2>
+    <div
+      className={`flex flex-col gap-9 ${
+        isDataLoaded ? "description-produit" : ""
+      }`}
+    >
+      <h2 className="font-serif text-5xl leading-tight">{nom}</h2>
       <p className="max-w-2xl italic text-sm leading-[20px] tracking-[-0.02em]">
-        Dans les contrées mystiques de la Terre du Milieu, rares sont les
-        artefacts aussi énigmatiques que le Médaillon de l&apos;Étoile
-        d&apos;Obsidienne. Forgé dans les forges secrètes de l&apos;Est, ce
-        talisman est réputé pour canaliser les énergies arcaniques les plus
-        profondes.
+        {description}
       </p>
       <div className="flex items-center gap-2 text-lg">
-        <span className="text-secondary">★★★☆☆</span>
-        <span className="text-sm italic font-bold text-text">2315 avis</span>
+        <span className="text-secondary">{"★".repeat(note)}</span>
+        <span className="text-sm italic font-bold text-text">{avis} avis</span>
       </div>
       <div className="flex items-end gap-4">
         <div className="flex flex-col items-center gap-1 text-2xl font-bold">
@@ -43,14 +53,18 @@ const DescriptionProduit = () => {
                 fill="currentColor"
               />
             </svg>
-            <span className="text-base italic text-text">39,99 Gondariar</span>
+            <span className="text-base italic text-text">
+              {formatGondariar(prix)}
+            </span>
           </div>
         </div>
         <span className="pb-2 text-sm italic line-through text-text">
-          59,99 Gondariar
+          {formatGondariar(ancienPrix)}
         </span>
       </div>
-      <span className="italic font-bold text-red">Plus que 20 en stocks</span>
+      <span className="italic font-bold text-red">
+        Plus que {stock} en stocks
+      </span>
       <div className="flex items-center gap-6 mt-2">
         <div className="flex items-center gap-2">
           <Image
