@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import { useLoginStore } from "../services/loginStore";
+import { useLogin } from "@/shared/helpers/Uselogin";
 
 const LoginForm = () => {
+  const [pseudo, setPseudo] = useState("");
+  const [motDePasse, setMotDePasse] = useState("");
+  const { mutate: login, isPending } = useLogin();
+  const closeLoginModal = useLoginStore((state) => state.closeLoginModal);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("submit");
+    login(
+      { pseudo, motDePasse },
+      {
+        onSuccess: () => {
+          closeLoginModal();
+        },
+      }
+    );
+  };
+
   return (
-    <div className="relative flex flex-col items-center gap-6 p-5">
+    <form
+      onSubmit={handleSubmit}
+      className="relative flex flex-col items-center gap-6 p-5"
+    >
       <Image
         src="/assets/svg/top-left.svg"
         alt="Décoration coin supérieur gauche"
@@ -46,34 +69,42 @@ const LoginForm = () => {
 
       <div className="w-full mb-4">
         <label
-          htmlFor="magical-id"
+          htmlFor="pseudo"
           className="block mb-2 text-sm italic text-left text-gray-300 text-primary"
         >
           Saisissez votre identifiant magique
         </label>
         <input
           type="text"
-          id="magical-id"
+          id="pseudo"
+          value={pseudo}
+          onChange={(e) => setPseudo(e.target.value)}
           className="w-full p-3 text-white bg-black border-2 rounded-md border-primary focus:outline-none focus:ring-1 focus:ring-primary"
         />
       </div>
 
       <div className="w-full mb-4">
         <label
-          htmlFor="magical-id"
+          htmlFor="motDePasse"
           className="block mb-2 text-sm italic text-left text-gray-300 text-primary"
         >
           Saisissez votre parole de passage
         </label>
         <input
-          type="text"
-          id="magical-id"
+          type="password"
+          id="motDePasse"
+          value={motDePasse}
+          onChange={(e) => setMotDePasse(e.target.value)}
           className="w-full p-3 text-white bg-black border-2 rounded-md border-primary focus:outline-none focus:ring-1 focus:ring-primary"
         />
       </div>
 
-      <button className="w-full py-3 text-lg font-semibold text-white transition duration-200 border rounded-md border-[#454440] hover:bg-primary hover:text-black">
-        Continuer
+      <button
+        type="submit"
+        disabled={isPending}
+        className="w-full py-3 text-lg font-semibold text-white transition duration-200 border rounded-md border-[#454440] hover:bg-primary hover:text-black disabled:opacity-50"
+      >
+        {isPending ? "Connexion en cours..." : "Continuer"}
       </button>
 
       <p className="mt-6 text-xs italic font-light">
@@ -95,7 +126,7 @@ const LoginForm = () => {
         </a>{" "}
         conservée dans les Archives d'Imladris.
       </p>
-    </div>
+    </form>
   );
 };
 
