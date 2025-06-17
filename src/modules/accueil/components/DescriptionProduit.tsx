@@ -61,7 +61,7 @@ const DescriptionProduit = ({
       <span className="italic font-bold text-red">
         Plus que {stock} en stocks
       </span>
-      <div className="flex items-center gap-6 mt-2">
+      {/* <div className="flex items-center gap-6 mt-2"> 
         <div className="flex items-center gap-2">
           <Image
             src="/assets/svg/-.svg"
@@ -82,7 +82,9 @@ const DescriptionProduit = ({
         <button className="add-to-cart" onClick={openLoginModal}>
           Ajouter au panier
         </button>
+        
       </div>
+      */}
     </div>
   );
 };
