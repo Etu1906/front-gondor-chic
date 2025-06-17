@@ -27,10 +27,6 @@ const DescriptionProduit = ({
       <p className="max-w-2xl italic text-sm leading-[20px] tracking-[-0.02em]">
         {description}
       </p>
-      <div className="flex items-center gap-2 text-lg">
-        <span className="text-secondary">{"★".repeat(note)}</span>
-        <span className="text-sm italic font-bold text-text">{avis} avis</span>
-      </div>
       <div className="flex items-end gap-4">
         <div className="flex flex-col items-center gap-1 text-2xl font-bold">
           <Image
